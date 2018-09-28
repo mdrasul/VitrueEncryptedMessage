@@ -1,0 +1,226 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.Vitrue.assignment</groupId>
+  <artifactId>VitrueEncryptedMessage-Cucumber</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>VitrueEncryptedMessage-Cucumber</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+
+   <!-- ####### Selenium ######### -->
+ 	    <dependency>
+         	<groupId>org.seleniumhq.selenium</groupId>
+         	<artifactId>selenium-java</artifactId>
+         	<version>3.0.0</version>
+     	</dependency>
+
+  		<!--dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>2.48.2</version>
+		</dependency-->
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>2.48.2</version>
+		</dependency>
+
+		<!--Extent Reports-->
+		<dependency>
+			<groupId>com.relevantcodes</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>2.40.1</version>
+    		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.8</version>
+		</dependency>
+
+
+    <!-- ####### Forked Cucumber  ######### -->
+			<dependency>
+			  <groupId>com.github.slaout.fork.info.cukesthreads</groupId>
+			  <artifactId>cucumber-core</artifactId>
+			  <version>1.2.4</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.github.slaout.fork.info.cukesthreads</groupId>
+			  <artifactId>cucumber-java</artifactId>
+			  <version>1.2.4</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.github.slaout.fork.info.cukesthreads</groupId>
+			  <artifactId>cucumber-spring</artifactId>
+			  <version>1.2.4</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.github.slaout.fork.info.cukesthreads</groupId>
+			  <artifactId>cucumber-junit</artifactId>
+			  <version>1.2.4</version>
+			</dependency>
+
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-context</artifactId>
+			    <version>4.0.2.RELEASE</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-test</artifactId>
+			    <version>4.0.2.RELEASE</version>
+			</dependency>
+
+  </dependencies>
+
+
+    <build>
+     <plugins>
+
+		<!-- ####### maven-compiler-plugin ######### -->
+           <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                		<!--fork>true</fork-->
+                    <encoding>UTF-8</encoding>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+       <!-- ####### maven-surefire-plugin ######### -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <!--skip>true</skip-->
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+
+  		<!-- ####### Codehouse MOOJO to RUN CUCK Test  ######### -->
+  		<plugin>
+			 <groupId>org.codehaus.mojo</groupId>
+			   <artifactId>exec-maven-plugin</artifactId>
+					<version>1.2.1</version>
+					 <executions>
+					    <execution>
+						  <phase>integration-test</phase>
+							<goals>
+								<goal>java</goal>
+							</goals>
+				        </execution>
+					 </executions>
+		 <configuration>
+		 	  	<classpathScope>test</classpathScope>
+
+			  <executableDependency>
+				<groupId>com.github.slaout.fork.info.cukesthreads</groupId>
+				<artifactId>cucumber-core</artifactId>
+			 </executableDependency>
+
+				<mainClass>cucumbermain.cucumbermain</mainClass>
+
+				<arguments>
+					<argument>--plugin</argument>
+					<argument>junit:target/cucumber-junit-report/allcukes.xml</argument>
+					<argument>--plugin</argument>
+					<argument>pretty</argument>
+					<argument>--plugin</argument>
+					<argument>html:target/cucumber-html-report</argument>
+
+					<argument>--plugin</argument>
+					<argument>json:target/cucumber.json</argument>
+					<argument>--plugin</argument>
+					<argument>html:target/site/cucumber-pretty</argument>
+
+
+					<!-- Using Tag  -->
+					<argument>--tags</argument>
+					<argument>@smoke</argument>
+
+					<!-- Create 5 Thread To Run All Scenarios  -->
+					<argument>--glue</argument>
+					<argument>samplesteps</argument>
+
+					<!-- Create 5 Thread To Run All Scenarios  -->
+					<argument>--threads</argument>
+					<argument>5</argument>
+
+					<!-- ## All Features File Location..## -->
+					<argument>src/test/resources/testfeatures/</argument>
+
+				</arguments>
+		</configuration>
+		  <dependencies>
+			<dependency>
+            <groupId>com.github.slaout.fork.info.cukesthreads</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>1.2.4</version>
+		    </dependency>
+		 </dependencies>
+	</plugin>
+
+	        <!-- ####### maven-failsafe-plugin ######### -->
+      		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+            </plugin>
+
+
+  	<!-- ####### maven-cucumber-reporting ######### -->
+            <plugin>
+    				<groupId>net.masterthought</groupId>
+    				<artifactId>maven-cucumber-reporting</artifactId>
+    				<version>3.8.0</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                             <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>AutoRunner_Cucumber</projectName>
+                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
+                            <jsonFiles>
+                                <!-- supports wildcard or name pattern -->
+                                <param>${project.build.directory}/target/cucumber.json</param>
+                            </jsonFiles>
+						 </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+     </plugins>
+	</build>
+
+
+
+
+</project>

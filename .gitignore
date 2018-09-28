@@ -1,0 +1,20 @@
+#Project Related Files
+.idea/
+target/
+*.iml
+
+#Logs and tmp files
+~*.*
+*.log
+
+#Eclipse relate files
+.classpath
+.settings/org.eclipse.jdt.core.prefs
+
+#temp files
+.DS_Store
+
+
+#Reporting Files 
+/test-output/*
+/reports/*
