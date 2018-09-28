@@ -1,6 +1,6 @@
 # Virtru Encrypted Message Reading Automation Script
 
-![Big Picture](./Images/Image 1.jpg)
+![Big Picture](./Images/Image1.jpg)
 
 
 
@@ -8,7 +8,7 @@
 This is simple assignment project to Demonstrate a Automation - reading  a Secure Encrypted email from  Virtru platform
 This Project contains a BDD based cucumber Java Script to make it more easy to understand 
 
-![Big Picture](./Images/Image 2.jpg)
+![Big Picture](./Images/Image2.jpg)
 
 
 
